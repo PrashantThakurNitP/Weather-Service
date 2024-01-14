@@ -22,8 +22,11 @@ public class SpringFoxConfig {
                 .build().apiInfo(apiInfo()).useDefaultResponseMessages(false);
     }
     @Bean
-    public ApiInfo apiInfo() {
-        final ApiInfoBuilder builder = new ApiInfoBuilder();
-        return builder.build();
+    public  ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("Weather API Documentation")
+                .version("1.0")
+                .description("Microservice to service weather forecast")
+                .build();
     }
 }
