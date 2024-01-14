@@ -67,7 +67,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>weather-microservice.jar</finalName>
+		<finalName>weather-microservice</finalName>
 	</build>
 
 </project>
