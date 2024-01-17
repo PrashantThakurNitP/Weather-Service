@@ -10,6 +10,5 @@ import lombok.experimental.SuperBuilder;
 public class DailyWeather {
     Double minTemperature;
     Double maxTemperature;
-
     String day;
 }

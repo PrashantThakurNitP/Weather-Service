@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import publicis.sapient.weathermicroservice.domain.WeatherResponse;
 
+import java.util.List;
+
 @RestController
 public interface WeatherController {
-    ResponseEntity<WeatherResponse> getWeatherForecast(String cityName);
+    ResponseEntity<List<WeatherResponse>> getWeatherForecast(String cityName);
 }

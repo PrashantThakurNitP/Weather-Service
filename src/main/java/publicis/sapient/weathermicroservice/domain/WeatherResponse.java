@@ -14,6 +14,6 @@ public class WeatherResponse {
     private String message;
 
     @ApiModelProperty
-    private DailyWeather [] dailyWeathers;
+    private DailyWeather  dailyWeathers;
 
 }
