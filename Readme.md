@@ -57,5 +57,13 @@ kubectl get replicasets
 
 kubectl get services <service_name>
 
+**To check log of service**
+
+kubectl logs <pod_name>
+
+**List all service**
+
+kubectl get svc
+
 
 
