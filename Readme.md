@@ -65,5 +65,8 @@ kubectl logs <pod_name>
 
 kubectl get svc
 
+**Get url**
+minikube service <service-name> --url
+minikube service weather-service-svc --url
 
 
