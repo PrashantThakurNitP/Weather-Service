@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1")
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class WeatherControllerImpl implements WeatherController {
 
     @Autowired
