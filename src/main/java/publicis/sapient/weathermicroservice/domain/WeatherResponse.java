@@ -14,6 +14,12 @@ public class WeatherResponse {
     private String message;
 
     @ApiModelProperty
+    private String icon;
+
+    @ApiModelProperty
+    private String description;
+
+    @ApiModelProperty
     private DailyWeather  dailyWeathers;
 
 }

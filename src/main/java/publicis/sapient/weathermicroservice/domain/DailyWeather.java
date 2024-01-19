@@ -8,7 +8,8 @@ import lombok.experimental.SuperBuilder;
 @ApiModel
 @SuperBuilder
 public class DailyWeather {
-    Double minTemperature;
-    Double maxTemperature;
-    String day;
+    int minTemperature;
+    int maxTemperature;
+    String date;
+    String time;
 }

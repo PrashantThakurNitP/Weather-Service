@@ -14,4 +14,5 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class WeatherRequest {
     String city;
+    int days;
 }

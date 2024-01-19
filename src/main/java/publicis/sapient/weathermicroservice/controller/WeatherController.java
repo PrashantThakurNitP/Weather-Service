@@ -9,5 +9,5 @@ import java.util.List;
 
 @RestController
 public interface WeatherController {
-    ResponseEntity<List<WeatherResponse>> getWeatherForecast(String cityName);
+    ResponseEntity<List<WeatherResponse>> getWeatherForecast(String cityName,int days);
 }
