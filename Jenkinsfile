@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools{
-        maven 'mavane_3_9_6'
+        maven 'maven_3_9_6'
     }
     parameters {
             string(name: 'K8S_MANIFEST_FILE', defaultValue: 'deploymentservice.yaml', description: 'Path to your Kubernetes manifest file')
