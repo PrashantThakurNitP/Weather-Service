@@ -32,6 +32,6 @@ spec:
     app: weather-service-k8s
   ports:
     - protocol: "TCP"
-      port: 8080 # The port that the service is running on in the cluster
-      targetPort: 8080 # The port exposed by the service
+      port: 8088 # The port that the service is running on in the cluster
+      targetPort: 8088 # The port exposed by the service
       nodePort: 31000

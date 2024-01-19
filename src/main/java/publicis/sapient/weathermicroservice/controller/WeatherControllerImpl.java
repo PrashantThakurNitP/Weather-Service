@@ -24,6 +24,7 @@ public class WeatherControllerImpl implements WeatherController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/weather", produces = "application/json")
     public ResponseEntity<List<WeatherResponse>> getWeatherForecast(@RequestParam String cityName) {
+        log.info("Get weather request for city : {}",cityName);
         WeatherRequest weatherRequest = new WeatherRequest();
         weatherRequest.setCity(cityName);
         return new ResponseEntity<>(weatherService.getWeatherForCity(weatherRequest), HttpStatus.OK);
