@@ -12,10 +12,12 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/v1/weather")
-                .allowedOrigins("http://localhost:3000")
+        registry.addMapping("/**")
+                .allowedOrigins("*")
                 .exposedHeaders("Access-Control-Allow-Origin")
-                .allowedMethods("GET", "POST", "PUT", "DELETE") // Specify the HTTP methods you want to allow
-                .allowCredentials(true); // Enable credentials if needed
+                .allowedMethods("*"); // Specify the HTTP methods you want to allow
+
+
     }
+
 }
