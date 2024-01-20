@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment {
+            OPENWEATHERMAP_API_KEY = credentials('weather-api-credential')
+        }
     tools{
         maven 'maven_3_9_6'
     }
@@ -18,7 +21,7 @@ pipeline{
         stage("Build Docker Image"){
             steps{
                 script{
-                    sh 'docker build -t prathaku3docker/weather-microservice .'
+                    sh 'docker build --build-arg API_KEY=${env.OPENWEATHERMAP_API_KEY} -t prathaku3docker/weather-microservice .'
                 }
             }
         }
