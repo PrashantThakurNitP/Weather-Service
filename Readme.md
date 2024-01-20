@@ -69,4 +69,7 @@ kubectl get svc
 minikube service <service-name> --url
 minikube service weather-service-svc --url
 
+kubectl create secret generic weather-api-credentials -- from-literal=OPENWEATHERMAP_API_KEY=your-key-value
 
+
+kubectl port-forward -n namespace-name pods/pod-name source-port:destination-port
