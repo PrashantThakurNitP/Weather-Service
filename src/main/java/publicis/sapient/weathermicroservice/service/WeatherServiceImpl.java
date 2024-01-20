@@ -2,14 +2,20 @@ package publicis.sapient.weathermicroservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import publicis.sapient.weathermicroservice.domain.DailyWeather;
 import publicis.sapient.weathermicroservice.domain.WeatherApiResponse;
 import publicis.sapient.weathermicroservice.domain.WeatherRequest;
 import publicis.sapient.weathermicroservice.domain.WeatherResponse;
+import publicis.sapient.weathermicroservice.exception.InternalServerError;
+import publicis.sapient.weathermicroservice.exception.NotFoundException;
+import publicis.sapient.weathermicroservice.exception.UnAuthorizedException;
 import publicis.sapient.weathermicroservice.utils.WeatherApiCall;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static publicis.sapient.weathermicroservice.utils.Constants.*;
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
@@ -18,10 +24,23 @@ public class WeatherServiceImpl implements WeatherService {
     private WeatherApiCall weatherApiCall;
 
     @Override
-    public List<WeatherResponse> getWeatherForCity(WeatherRequest weatherRequest) {
+    public List<WeatherResponse> getWeatherForCity(WeatherRequest weatherRequest) throws NotFoundException, UnAuthorizedException, InternalServerError {
         int count = weatherRequest.getDays() * 8;
-        WeatherApiResponse response = weatherApiCall.getWeatherInfo(weatherRequest.getCity(), count);
-        return mapWeatherResponse(response, count);
+        try {
+            WeatherApiResponse response = weatherApiCall.getWeatherInfo(weatherRequest.getCity(), count);
+            return mapWeatherResponse(response, count);
+        }
+        catch (HttpClientErrorException.NotFound ex){
+            throw new NotFoundException(ex.getMessage());
+        }
+        catch (HttpClientErrorException.Unauthorized ex){
+            throw new UnAuthorizedException("Unable to fetch Weather!");
+        }
+        catch (Exception ex){
+            throw new InternalServerError(ex.getMessage());
+        }
+
+
     }
 
     private List<WeatherResponse> mapWeatherResponse(WeatherApiResponse response, int count) {
@@ -55,17 +74,17 @@ public class WeatherServiceImpl implements WeatherService {
         double windSpeed = response.getList().get(i).getWind().getSpeed();
 
         if (temperature > 313) {
-            return "Use sunscreen lotion";
+            return MESSAGE_FOR_HIGH_TEMP;
         } else if (weatherId >= 500 && weatherId < 600) {
-            return "Carry umbrella";
+            return MESSAGE_FOR_RAIN;
         } else if (windSpeed > 10) {
-            return "It’s too windy, watch out!";
+            return MESSAGE_FOR_HIGH_WINDS;
         } else if (weatherId >= 200 && weatherId < 300) {
-            return "Don’t step out! A Storm is brewing!";
+            return MESSAGE_FOR_THUNDERSTORM;
         } else if (temperature < 283) {
-            return "Chilling Outside!";
+            return MESSAGE_FOR_LOW_TEMP;
         } else {
-            return "Nice Weather";
+            return MESSAGE_FOR_NICE_WEATHER;
         }
     }
 }

@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import publicis.sapient.weathermicroservice.domain.WeatherRequest;
 import publicis.sapient.weathermicroservice.domain.WeatherResponse;
+import publicis.sapient.weathermicroservice.exception.InternalServerError;
+import publicis.sapient.weathermicroservice.exception.NotFoundException;
+import publicis.sapient.weathermicroservice.exception.UnAuthorizedException;
 import publicis.sapient.weathermicroservice.service.WeatherService;
 
 import java.util.List;
@@ -23,8 +26,8 @@ public class WeatherControllerImpl implements WeatherController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/weather", produces = "application/json")
-    public ResponseEntity<List<WeatherResponse>> getWeatherForecast(@RequestParam String cityName,@RequestParam int days) {
-        log.info("Get weather request for city : {}",cityName);
+    public ResponseEntity<List<WeatherResponse>> getWeatherForecast(@RequestParam String cityName,@RequestParam int days) throws NotFoundException, UnAuthorizedException, InternalServerError {
+        log.info("Get weather request for city : {} days : {}",cityName,days);
         WeatherRequest weatherRequest = new WeatherRequest();
         weatherRequest.setCity(cityName);
         weatherRequest.setDays(days);
