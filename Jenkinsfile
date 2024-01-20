@@ -12,9 +12,15 @@ pipeline{
         stage("Build maven project"){
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/PrashantThakurNitP/Weather-Service.git']])
-                sh 'mvn clean install'
+                sh 'mvn clean package'
             }
         }
+         stage('Run JUnit Tests') {
+                    steps {
+                        echo "Running unit tests"
+                        sh 'mvn install'
+                    }
+                }
         stage("Build Docker Image"){
             steps{
                 script{
