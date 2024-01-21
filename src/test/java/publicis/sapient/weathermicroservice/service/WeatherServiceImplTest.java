@@ -34,7 +34,7 @@ class WeatherServiceImplTest {
     private AutoCloseable closeable;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
     }
 
@@ -65,6 +65,14 @@ class WeatherServiceImplTest {
         assertEquals(MESSAGE_FOR_LOW_TEMP, result.get(5).getMessage());
         assertEquals(MESSAGE_FOR_HIGH_WINDS, result.get(6).getMessage());
         assertEquals(MESSAGE_FOR_HIGH_TEMP, result.get(7).getMessage());
+        assertEquals("21-04-1995", result.get(0).getDailyWeathers().getDate());
+        assertEquals("3:00:00", result.get(0).getDailyWeathers().getTime());
+        assertEquals(27, result.get(0).getDailyWeathers().getMaxTemperature());
+        assertEquals(2, result.get(0).getDailyWeathers().getMinTemperature());
+        assertEquals(5, result.get(0).getDailyWeathers().getWindSpeed());
+        assertEquals("Cloudy", result.get(0).getDescription());
+        assertEquals("01", result.get(0).getIcon());
+        assertEquals("Hot", result.get(0).getWeatherType());
 
     }
 
@@ -90,7 +98,7 @@ class WeatherServiceImplTest {
     }
 
     private WeatherApiResponse createMockWeatherApiResponse() {
-        WeatherData weatherData1 = WeatherData.builder().dt_txt("21-04-1995 3:00:00").main(MainData.builder().temp(290).temp_min(275).temp_max(300).build()).weather(List.of(WeatherDescription.builder().description("Cloudy").icon("01").main("main").id(301).build())).wind(WindData.builder().speed(5.0).build()).build();//nice weather
+        WeatherData weatherData1 = WeatherData.builder().dt_txt("21-04-1995 3:00:00").main(MainData.builder().temp(290).temp_min(275).temp_max(300).build()).weather(List.of(WeatherDescription.builder().description("Cloudy").icon("01").main("Hot").id(301).build())).wind(WindData.builder().speed(5.0).build()).build();//nice weather
         WeatherData weatherData2 = WeatherData.builder().dt_txt("21-04-1995 6:00:00").main(MainData.builder().temp(290).temp_min(275).temp_max(300).build()).weather(List.of(WeatherDescription.builder().description("Cloudy").icon("01").main("main").id(301).build())).wind(WindData.builder().speed(1.0).build()).build();
         WeatherData weatherData3 = WeatherData.builder().dt_txt("21-04-1995 9:00:00").main(MainData.builder().temp(290).temp_min(275).temp_max(300).build()).weather(List.of(WeatherDescription.builder().description("Cloudy").icon("01").main("main").id(303).build())).wind(WindData.builder().speed(5.0).build()).build();
 
@@ -100,6 +108,6 @@ class WeatherServiceImplTest {
 
         WeatherData weatherData7 = WeatherData.builder().dt_txt("21-04-1995 21:00:00").main(MainData.builder().temp(293).temp_min(275).temp_max(300).build()).weather(List.of(WeatherDescription.builder().description("Cloudy").icon("01").main("main").build())).wind(WindData.builder().speed(20.0).build()).build();//high winds
         WeatherData weatherData8 = WeatherData.builder().dt_txt("22-04-1995 00:00:00").main(MainData.builder().temp(314).temp_min(275).temp_max(300).build()).weather(List.of(WeatherDescription.builder().description("Rainy").icon("01").main("main").build())).wind(WindData.builder().speed(6.0).build()).build();//high temp
-        return WeatherApiResponse.builder().cnt(1).list(List.of(weatherData1, weatherData2, weatherData3, weatherData4, weatherData5, weatherData6, weatherData7, weatherData8)).build();
+        return WeatherApiResponse.builder().list(List.of(weatherData1, weatherData2, weatherData3, weatherData4, weatherData5, weatherData6, weatherData7, weatherData8)).build();
     }
 }

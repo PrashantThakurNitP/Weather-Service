@@ -1,13 +1,14 @@
 package publicis.sapient.weathermicroservice.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Data
 @SuperBuilder
+@NoArgsConstructor
+@Data
 public class MainData {
     int temp;
     int temp_min;
     int temp_max;
-    Double humidity;
 }

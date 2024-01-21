@@ -1,5 +1,6 @@
 package publicis.sapient.weathermicroservice.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -18,6 +19,7 @@ import java.util.List;
 import static publicis.sapient.weathermicroservice.utils.Constants.*;
 
 @Service
+@Slf4j
 public class WeatherServiceImpl implements WeatherService {
 
     @Autowired
@@ -31,12 +33,15 @@ public class WeatherServiceImpl implements WeatherService {
             return mapWeatherResponse(response, count);
         }
         catch (HttpClientErrorException.NotFound ex){
+            log.error("NotFound HttpClientErrorException Exception Occurred",ex);
             throw new NotFoundException(ex.getMessage());
         }
         catch (HttpClientErrorException.Unauthorized ex){
+            log.error("Unauthorized HttpClientErrorException Exception Occurred",ex);
             throw new UnAuthorizedException("Unable to fetch Weather!");
         }
         catch (Exception ex){
+            log.error("Exception Occurred",ex);
             throw new InternalServerError(ex.getMessage());
         }
 
@@ -51,6 +56,7 @@ public class WeatherServiceImpl implements WeatherService {
             WeatherResponse weather = WeatherResponse.builder()
                     .dailyWeathers(dailyWeather)
                     .message(message)
+                    .weatherType(response.getList().get(i).getWeather().get(0).getMain())
                     .icon(response.getList().get(i).getWeather().get(0).getIcon())
                     .description(response.getList().get(i).getWeather().get(0).getDescription())
                     .build();
@@ -63,6 +69,8 @@ public class WeatherServiceImpl implements WeatherService {
         return DailyWeather.builder()
                 .minTemperature(response.getList().get(i).getMain().getTemp_min() - 273)
                 .maxTemperature(response.getList().get(i).getMain().getTemp_max() - 273)
+                .temperature(response.getList().get(i).getMain().getTemp()-273)
+                .windSpeed(response.getList().get(i).getWind().getSpeed())
                 .date(response.getList().get(i).getDt_txt().split(" ")[0])
                 .time(response.getList().get(i).getDt_txt().split(" ")[1])
                 .build();

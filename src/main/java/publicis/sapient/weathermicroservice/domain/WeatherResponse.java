@@ -22,4 +22,7 @@ public class WeatherResponse {
     @ApiModelProperty
     private DailyWeather  dailyWeathers;
 
+    @ApiModelProperty
+    private String  weatherType;
+
 }

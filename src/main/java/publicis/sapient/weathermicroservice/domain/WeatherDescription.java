@@ -1,10 +1,12 @@
 package publicis.sapient.weathermicroservice.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Data
 @SuperBuilder
+@NoArgsConstructor
+@Data
 public class WeatherDescription {
     int id;
     String main;

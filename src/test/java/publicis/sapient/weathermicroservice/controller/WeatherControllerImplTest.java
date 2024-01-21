@@ -9,9 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
+
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import publicis.sapient.weathermicroservice.domain.DailyWeather;
@@ -27,9 +26,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("test")
 public class WeatherControllerImplTest {
 
     private MockMvc mockMvc;
@@ -52,7 +49,7 @@ public class WeatherControllerImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         closeable = MockitoAnnotations.openMocks(this);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(weatherController)
@@ -103,16 +100,6 @@ public class WeatherControllerImplTest {
         WeatherRequest weatherRequest = new WeatherRequest();
         weatherRequest.setCity(cityName);
         weatherRequest.setDays(days);
-        WeatherResponse weatherResponse1 = WeatherResponse.builder()
-                .dailyWeathers(DailyWeather.builder().maxTemperature(300).minTemperature(273)
-                        .date("2024-01-20").time("15:00:00").build())
-                .icon("01n").description("clear sky").message("Nice Weather").build();
-        WeatherResponse weatherResponse2 = WeatherResponse.builder()
-                .dailyWeathers(DailyWeather.builder().maxTemperature(310).minTemperature(283)
-                        .date("2024-01-20").time("15:00:00").build())
-                .icon("01n").description("Cloudy").message("Nice Weather").build();
-        List<WeatherResponse> mockWeatherResponseList = Arrays.asList(weatherResponse1, weatherResponse2);
-
         when(weatherService.getWeatherForCity(weatherRequest)).thenThrow(NotFoundException.class);
 
         mockMvc.perform(get("/v1/weather")
