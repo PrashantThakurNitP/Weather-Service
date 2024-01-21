@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import publicis.sapient.weathermicroservice.domain.WeatherRequest;
-import publicis.sapient.weathermicroservice.domain.WeatherResponse;
+import publicis.sapient.weathermicroservice.domain.response.WeatherResponse;
 import publicis.sapient.weathermicroservice.exception.InternalServerError;
 import publicis.sapient.weathermicroservice.exception.NotFoundException;
 import publicis.sapient.weathermicroservice.exception.UnAuthorizedException;

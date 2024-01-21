@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import publicis.sapient.weathermicroservice.domain.DailyWeather;
+import publicis.sapient.weathermicroservice.domain.response.DailyWeather;
 import publicis.sapient.weathermicroservice.domain.WeatherApiResponse;
 import publicis.sapient.weathermicroservice.domain.WeatherRequest;
-import publicis.sapient.weathermicroservice.domain.WeatherResponse;
+import publicis.sapient.weathermicroservice.domain.response.WeatherResponse;
 import publicis.sapient.weathermicroservice.exception.InternalServerError;
 import publicis.sapient.weathermicroservice.exception.NotFoundException;
 import publicis.sapient.weathermicroservice.exception.UnAuthorizedException;
@@ -73,6 +73,10 @@ public class WeatherServiceImpl implements WeatherService {
                 .windSpeed(response.getList().get(i).getWind().getSpeed())
                 .date(response.getList().get(i).getDt_txt().split(" ")[0])
                 .time(response.getList().get(i).getDt_txt().split(" ")[1])
+                .humidity(response.getList().get(i).getMain().getHumidity())
+                .pressure(response.getList().get(i).getMain().getPressure())
+                .feelsLike(response.getList().get(i).getMain().getFeels_like()-273)
+                .visibility(response.getList().get(i).getVisibility())
                 .build();
     }
 
@@ -80,6 +84,8 @@ public class WeatherServiceImpl implements WeatherService {
         double temperature = response.getList().get(i).getMain().getTemp();
         int weatherId = response.getList().get(i).getWeather().get(0).getId();
         double windSpeed = response.getList().get(i).getWind().getSpeed();
+        int humidity = response.getList().get(i).getMain().getHumidity();
+        int visibility = response.getList().get(i).getVisibility();
 
         if (temperature > 313) {
             return MESSAGE_FOR_HIGH_TEMP;
@@ -91,7 +97,16 @@ public class WeatherServiceImpl implements WeatherService {
             return MESSAGE_FOR_THUNDERSTORM;
         } else if (temperature < 283) {
             return MESSAGE_FOR_LOW_TEMP;
-        } else {
+        }
+        else if (temperature < 288) {
+            return MESSAGE_FOR_SLIGHT_LOW_TEMP;
+        }
+        else if (visibility < 100) {
+            return MESSAGE_FOR_SLIGHT_LOW_VISIBILITY;
+        }
+        else if (humidity >70) {
+            return MESSAGE_FOR_HUMIDITY;
+        }else {
             return MESSAGE_FOR_NICE_WEATHER;
         }
     }

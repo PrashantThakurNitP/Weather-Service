@@ -15,6 +15,7 @@ public class WeatherData {
     private List<WeatherDescription> weather;
     private WindData wind;
     private String dt_txt;
+    private int visibility;
 
 
 }

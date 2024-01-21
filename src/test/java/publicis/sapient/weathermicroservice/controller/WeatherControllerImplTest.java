@@ -13,9 +13,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import publicis.sapient.weathermicroservice.domain.DailyWeather;
+import publicis.sapient.weathermicroservice.domain.response.DailyWeather;
 import publicis.sapient.weathermicroservice.domain.WeatherRequest;
-import publicis.sapient.weathermicroservice.domain.WeatherResponse;
+import publicis.sapient.weathermicroservice.domain.response.WeatherResponse;
 import publicis.sapient.weathermicroservice.exception.NotFoundException;
 import publicis.sapient.weathermicroservice.service.WeatherServiceImpl;
 

@@ -8,4 +8,7 @@ public class Constants {
     public static final String MESSAGE_FOR_RAIN="Carry umbrella";
 
     public static final String MESSAGE_FOR_NICE_WEATHER="Nice Weather";
+    public static final String MESSAGE_FOR_SLIGHT_LOW_TEMP="Cold Outside";
+    public static final String MESSAGE_FOR_SLIGHT_LOW_VISIBILITY="Low Visibility";
+    public static final String MESSAGE_FOR_HUMIDITY="Humid";
 }

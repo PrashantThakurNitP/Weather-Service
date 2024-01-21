@@ -1,4 +1,4 @@
-package publicis.sapient.weathermicroservice.domain;
+package publicis.sapient.weathermicroservice.domain.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,7 +20,7 @@ public class WeatherResponse {
     private String description;
 
     @ApiModelProperty
-    private DailyWeather  dailyWeathers;
+    private DailyWeather dailyWeathers;
 
     @ApiModelProperty
     private String  weatherType;

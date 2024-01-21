@@ -1,4 +1,4 @@
-package publicis.sapient.weathermicroservice.domain;
+package publicis.sapient.weathermicroservice.domain.response;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -12,8 +12,12 @@ import lombok.experimental.SuperBuilder;
 public class DailyWeather {
     int minTemperature;
     int maxTemperature;
+    int feelsLike;
+    int humidity;
+    int pressure;
     int temperature;
     String date;
     String time;
     Double windSpeed;
+    int visibility;
 }

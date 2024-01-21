@@ -11,4 +11,7 @@ public class MainData {
     int temp;
     int temp_min;
     int temp_max;
+    int feels_like;
+    int pressure;
+    int humidity;
 }
