@@ -77,6 +77,7 @@ class WeatherServiceImplTest {
         assertEquals("Cloudy", result.get(0).getDescription());
         assertEquals("01", result.get(0).getIcon());
         assertEquals("Hot", result.get(0).getWeatherType());
+        assertEquals(18000, result.get(0).getTimezoneOffset());
 
     }
 
@@ -112,7 +113,7 @@ class WeatherServiceImplTest {
 
         WeatherData weatherData7 = WeatherData.builder().dt_txt("21-04-1995 21:00:00").visibility(500).main(MainData.builder().temp(293).temp_min(275).temp_max(300).humidity(50).pressure(1012).feels_like(278).build()).weather(List.of(WeatherDescription.builder().description("Cloudy").icon("01").main("main").build())).wind(WindData.builder().speed(20.0).build()).build();//high winds
         WeatherData weatherData8 = WeatherData.builder().dt_txt("22-04-1995 00:00:00").visibility(500).main(MainData.builder().temp(314).temp_min(275).temp_max(300).humidity(50).pressure(1012).feels_like(278).build()).weather(List.of(WeatherDescription.builder().description("Rainy").icon("01").main("main").build())).wind(WindData.builder().speed(6.0).build()).build();//high temp
-        return WeatherApiResponse.builder().list(List.of(weatherData1, weatherData2, weatherData3, weatherData4, weatherData5, weatherData6, weatherData7, weatherData8)).build();
+        return WeatherApiResponse.builder().city(City.builder().timezone(18000).build()).list(List.of(weatherData1, weatherData2, weatherData3, weatherData4, weatherData5, weatherData6, weatherData7, weatherData8)).build();
     }
 }
 

@@ -5,13 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
-
 @ApiModel
 @SuperBuilder
 @NoArgsConstructor
 @Data
-public class WeatherApiResponse {
-    private List<WeatherData> list;
-    private City city;
+public class City {
+    private int timezone;
 }

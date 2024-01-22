@@ -59,6 +59,7 @@ public class WeatherServiceImpl implements WeatherService {
                     .weatherType(response.getList().get(i).getWeather().get(0).getMain())
                     .icon(response.getList().get(i).getWeather().get(0).getIcon())
                     .description(response.getList().get(i).getWeather().get(0).getDescription())
+                    .timezoneOffset(response.getCity().getTimezone())
                     .build();
             weatherResponses.add(weather);
         }

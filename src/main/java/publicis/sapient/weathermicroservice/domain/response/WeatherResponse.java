@@ -24,5 +24,7 @@ public class WeatherResponse {
 
     @ApiModelProperty
     private String  weatherType;
+    @ApiModelProperty
+    private int timezoneOffset;
 
 }
