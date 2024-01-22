@@ -1,3 +1,13 @@
+# Weather Microservice
+
+## This Weather Microservice is built Using SpringBoot . It aims to provide users with accurate and insightful weather information for the next 3 days. Utilizes Open Weather API to get accurate weather prediction for any city, processes it, and return the forecast along with additional conditions like rain, high winds, and thunderstorms.
+
+## Deployment
+
+This Repo Contain Jenkins Script which run build, test, create docker image, push to docker hub and deploy on minikube kubernetes cluster
+
+## Commands Used
+
 **Start Jenkins server**
 
 brew services start jenkins-lts

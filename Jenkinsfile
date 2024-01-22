@@ -3,11 +3,6 @@ pipeline{
     tools{
         maven 'maven_3_9_6'
     }
-    parameters {
-            string(name: 'K8S_MANIFEST_FILE', defaultValue: 'deploymentservice.yaml', description: 'Path to your Kubernetes manifest file')
-            string(name: 'DOCKER_IMAGE', defaultValue: 'prathaku3docker/weather-microservice', description: 'Docker image name')
-            string(name: 'DOCKER_IMAGE_TAG', defaultValue: 'latest', description: 'Docker image Tag')
-        }
     stages{
         stage("Build maven project"){
             steps{
