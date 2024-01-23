@@ -2,34 +2,31 @@
 
 ## This Weather Microservice is built Using SpringBoot . It aims to provide users with accurate and insightful weather information for the next 3 days. Utilizes Open Weather API to get accurate weather prediction for any city, processes it, and return the forecast along with additional conditions like rain, high winds, and thunderstorms.
 
+
+## Swagger Doc
+![Screenshot 2024-01-23 at 2.15.20 PM.png](Screenshot%202024-01-23%20at%202.15.20%E2%80%AFPM.png)
+![Screenshot 2024-01-23 at 1.56.55 PM.png](Screenshot%202024-01-23%20at%201.56.55%E2%80%AFPM.png)
+![Screenshot 2024-01-23 at 1.57.51 PM.png](Screenshot%202024-01-23%20at%201.57.51%E2%80%AFPM.png)
+
 ## Deployment
 
 This Repo Contain Jenkins Script which run build, test, create docker image, push to docker hub and deploy on minikube kubernetes cluster
 
-## Swagger Doc
 
-![img.png](img.png)
+## Jenkins Dashboard
+![Screenshot 2024-01-23 at 1.55.09 PM.png](Screenshot%202024-01-23%20at%201.55.09%E2%80%AFPM.png)
 
-![img_1.png](img_1.png)
 
-![img_2.png](img_2.png)
+## Minikube (Kubernetes) : Deployment, Service and Pod
+![Screenshot 2024-01-23 at 2.09.57 PM.png](Screenshot%202024-01-23%20at%202.09.57%E2%80%AFPM.png)
 
-Jenkins Dashboard
 
-![img_3.png](img_3.png)
+## Code Coverage
 
-Deployment
+![Screenshot 2024-01-23 at 2.21.46 PM.png](Screenshot%202024-01-23%20at%202.21.46%E2%80%AFPM.png)
 
-![img_4.png](img_4.png)
-
-Coverage
-
-![img_5.png](img_5.png)
-
-Minikube (Kubernetes) : Deployment, Service and Pod
-
-![img_6.png](img_6.png)
-
+## API Used
+OpenWeather API https://openweathermap.org/
 
 
 
