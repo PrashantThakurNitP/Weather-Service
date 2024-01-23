@@ -6,6 +6,33 @@
 
 This Repo Contain Jenkins Script which run build, test, create docker image, push to docker hub and deploy on minikube kubernetes cluster
 
+## Swagger Doc
+
+![img.png](img.png)
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
+
+Jenkins Dashboard
+
+![img_3.png](img_3.png)
+
+Deployment
+
+![img_4.png](img_4.png)
+
+Coverage
+
+![img_5.png](img_5.png)
+
+Minikube (Kubernetes) : Deployment, Service and Pod
+
+![img_6.png](img_6.png)
+
+
+
+
 ## Commands Used
 
 **Start Jenkins server**
