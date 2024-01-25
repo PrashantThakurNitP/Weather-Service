@@ -27,7 +27,7 @@ public class WeatherApiCall {
 
     public WeatherApiResponse getWeatherInfo(String cityName,int cnt) {
         String url = String.format("%s/?q=%s&appid=%s&cnt=%d", apiUrl, cityName, apiKey,cnt);
-        log.info("Calling Open Weather API with City :{}, Count : {} {}",cityName,cnt,url);
+        log.info("Calling Open Weather API with City : {}, Count : {}, Url: {}",cityName,cnt,apiUrl);
         return restTemplate.getForObject(url, WeatherApiResponse.class);
 
     }

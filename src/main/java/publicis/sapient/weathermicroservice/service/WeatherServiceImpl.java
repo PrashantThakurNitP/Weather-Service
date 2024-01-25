@@ -72,8 +72,8 @@ public class WeatherServiceImpl implements WeatherService {
                 .maxTemperature(response.getList().get(i).getMain().getTemp_max() - 273)
                 .temperature(response.getList().get(i).getMain().getTemp()-273)
                 .windSpeed(response.getList().get(i).getWind().getSpeed())
-                .date(response.getList().get(i).getDt_txt().split(" ")[0])
-                .time(response.getList().get(i).getDt_txt().split(" ")[1])
+                .date(response.getList().get(i).getDt_txt().split(" ").length>1?response.getList().get(i).getDt_txt().split(" ")[0]:"")
+                .time(response.getList().get(i).getDt_txt().split(" ").length>1?response.getList().get(i).getDt_txt().split(" ")[1]:"")
                 .humidity(response.getList().get(i).getMain().getHumidity())
                 .pressure(response.getList().get(i).getMain().getPressure())
                 .feelsLike(response.getList().get(i).getMain().getFeels_like()-273)
@@ -83,7 +83,7 @@ public class WeatherServiceImpl implements WeatherService {
 
     private static String getSuggestionForWeather(WeatherApiResponse response, int i) {
         double temperature = response.getList().get(i).getMain().getTemp();
-        int weatherId = response.getList().get(i).getWeather().get(0).getId();
+        int weatherId = !response.getList().get(i).getWeather().isEmpty() ? response.getList().get(i).getWeather().get(0).getId():-1;
         double windSpeed = response.getList().get(i).getWind().getSpeed();
         int humidity = response.getList().get(i).getMain().getHumidity();
         int visibility = response.getList().get(i).getVisibility();

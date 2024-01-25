@@ -24,7 +24,7 @@ public class SpringFoxConfig {
     @Bean
     public  ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Weather Service API Documentation")
+                .title("Weather Forecast Service API Documentation")
                 .version("1.0")
                 .description("Microservice to provide weather forecast")
                 .build();
