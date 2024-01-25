@@ -16,7 +16,7 @@ spec:
         - name: weather-service-k8s
           image: prathaku3docker/weather-microservice:latest
           # Image that will be used to containers in the cluster
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
