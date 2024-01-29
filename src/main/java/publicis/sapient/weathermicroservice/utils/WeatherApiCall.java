@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import publicis.sapient.weathermicroservice.domain.WeatherApiResponse;
+import publicis.sapient.weathermicroservice.domain.WeatherRequest;
 
 @Component
 @Slf4j
@@ -18,6 +19,9 @@ public class WeatherApiCall {
     @Value("${openweathermap.api.url}")
     private String apiUrl;
 
+    @Value("${openweathermap.api.noOfResponseForDay}")
+    private int noOfResponseForDay;
+
     private final RestTemplate restTemplate;
 
     @Autowired
@@ -25,9 +29,10 @@ public class WeatherApiCall {
         this.restTemplate = restTemplate;
     }
 
-    public WeatherApiResponse getWeatherInfo(String cityName,int cnt) {
-        String url = String.format("%s/?q=%s&appid=%s&cnt=%d", apiUrl, cityName, apiKey,cnt);
-        log.info("Calling Open Weather API with City : {}, Count : {}, Url: {}",cityName,cnt,apiUrl);
+    public WeatherApiResponse getWeatherInfo(WeatherRequest weatherRequest) {
+        int count = weatherRequest.getDays() * noOfResponseForDay;
+        String url = String.format("%s/?q=%s&appid=%s&cnt=%d", apiUrl, weatherRequest.getCity(), apiKey,count);
+        log.info("Calling Open Weather API with City : {}, Count : {}, Url: {}",weatherRequest.getCity(),count,apiUrl);
         return restTemplate.getForObject(url, WeatherApiResponse.class);
 
     }

@@ -50,7 +50,7 @@ class WeatherServiceImplTest {
         WeatherRequest weatherRequest = new WeatherRequest("TestCity", 1);
         WeatherApiResponse mockResponse = createMockWeatherApiResponse();
 
-        when(weatherApiCall.getWeatherInfo(any(), anyInt())).thenReturn(mockResponse);
+        when(weatherApiCall.getWeatherInfo(any())).thenReturn(mockResponse);
 
         // Perform the test
         List<WeatherResponse> result = weatherService.getWeatherForCity(weatherRequest);
@@ -79,7 +79,7 @@ class WeatherServiceImplTest {
         WeatherRequest weatherRequest = new WeatherRequest("TestCity", 1);
         WeatherApiResponse mockResponse = createMockWeatherApiResponseForMessage();
 
-        when(weatherApiCall.getWeatherInfo(any(), anyInt())).thenReturn(mockResponse);
+        when(weatherApiCall.getWeatherInfo(any())).thenReturn(mockResponse);
 
         // Perform the test
         List<WeatherResponse> result = weatherService.getWeatherForCity(weatherRequest);
@@ -101,21 +101,21 @@ class WeatherServiceImplTest {
     @Test
     void testGetWeatherForCity_NotFound() {
         WeatherRequest weatherRequest = new WeatherRequest("TestCity", 5);
-        when(weatherApiCall.getWeatherInfo(any(), anyInt())).thenThrow(HttpClientErrorException.create("not found", HttpStatus.NOT_FOUND, "400", new HttpHeaders(), new byte[]{}, Charset.defaultCharset()));
+        when(weatherApiCall.getWeatherInfo(any())).thenThrow(HttpClientErrorException.create("not found", HttpStatus.NOT_FOUND, "400", new HttpHeaders(), new byte[]{}, Charset.defaultCharset()));
         assertThrows(NotFoundException.class, () -> weatherService.getWeatherForCity(weatherRequest));
     }
 
     @Test
     void testGetWeatherForCity_Unauthorized() {
         WeatherRequest weatherRequest = new WeatherRequest("TestCity", 5);
-        when(weatherApiCall.getWeatherInfo(any(), anyInt())).thenThrow(HttpClientErrorException.create("not found", HttpStatus.UNAUTHORIZED, "400", new HttpHeaders(), new byte[]{}, Charset.defaultCharset()));
+        when(weatherApiCall.getWeatherInfo(any())).thenThrow(HttpClientErrorException.create("not found", HttpStatus.UNAUTHORIZED, "400", new HttpHeaders(), new byte[]{}, Charset.defaultCharset()));
         assertThrows(UnAuthorizedException.class, () -> weatherService.getWeatherForCity(weatherRequest));
     }
 
     @Test
     void testGetWeatherForCity_InternalServerError() {
         WeatherRequest weatherRequest = new WeatherRequest("TestCity", 5);
-        when(weatherApiCall.getWeatherInfo(any(), anyInt())).thenThrow(new RuntimeException("exception"));
+        when(weatherApiCall.getWeatherInfo(any())).thenThrow(new RuntimeException("exception"));
         assertThrows(InternalServerError.class, () -> weatherService.getWeatherForCity(weatherRequest));
     }
 

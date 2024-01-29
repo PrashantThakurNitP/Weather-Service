@@ -27,7 +27,7 @@ public class WeatherControllerImpl implements WeatherController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/weather", produces = "application/json")
     public ResponseEntity<List<WeatherResponse>> getWeatherForecast(@RequestParam String cityName,@RequestParam int days) throws NotFoundException, UnAuthorizedException, InternalServerError {
-        log.info("Get weather forecast for city : {} days : {}",cityName,days);
+        log.info("Get weather forecast  for city : {} days : {}",cityName,days);
         WeatherRequest weatherRequest = new WeatherRequest();
         weatherRequest.setCity(cityName);
         weatherRequest.setDays(days);

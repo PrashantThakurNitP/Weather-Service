@@ -28,12 +28,15 @@ class WeatherApiCallTest {
     private String apiKey;
     @Value("${openweathermap.api.url}")
     private String apiUrl;
+    @Value("${openweathermap.api.noOfResponseForDay}")
+    private int noOfResponseForDay;
     private AutoCloseable closeable;
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
         ReflectionTestUtils.setField(weatherApiCall, "apiKey", "your-api-key");
         ReflectionTestUtils.setField(weatherApiCall, "apiUrl", "http://example.com/api");
+        ReflectionTestUtils.setField(weatherApiCall, "noOfResponseForDay", 8);
     }
     @After
     public void close() throws Exception {
@@ -49,9 +52,10 @@ class WeatherApiCallTest {
 
         // Mock behavior of RestTemplate
         when(restTemplate.getForObject(anyString(), eq(WeatherApiResponse.class))).thenReturn(mockApiResponse);
+        WeatherRequest weatherRequest = WeatherRequest.builder().days(1).city("TestCity").build();
 
         // Perform the test
-        WeatherApiResponse result = weatherApiCall.getWeatherInfo("TestCity", 5);
+        WeatherApiResponse result = weatherApiCall.getWeatherInfo(weatherRequest);
         Assertions.assertNotNull(result);
         assertEquals(2,result.getList().size());
         assertEquals(290,result.getList().get(0).getMain().getTemp());
@@ -59,7 +63,7 @@ class WeatherApiCallTest {
         assertEquals(5,result.getList().get(0).getWind().getSpeed());
         assertEquals("Cloudy",result.getList().get(0).getWeather().get(0).getDescription());
         assertEquals(18000,result.getCity().getTimezone());
-        String expectedUrl = "http://example.com/api/?q=TestCity&appid=your-api-key&cnt=5";
+        String expectedUrl = "http://example.com/api/?q=TestCity&appid=your-api-key&cnt=8";
         verify(restTemplate, times(1)).getForObject(eq(expectedUrl), eq(WeatherApiResponse.class));
     }
 }

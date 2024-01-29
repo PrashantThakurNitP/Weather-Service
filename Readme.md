@@ -112,6 +112,10 @@ kubectl create secret generic weather-api-credentials \
 secret/weather-api-credentials created
 zsh: command not found: --namespace=default
 
+**Access Secret**
+
+kubectl get secret weather-api-credentials -o yaml
+
 Deploy application using jenkins
 
 **Port forward to access it**
@@ -121,4 +125,7 @@ kubectl port-forward -n default pods/<pod-name>8080:8080
 **Run locally**
 export OPENWEATHERMAP_API_KEY=<api-key>
 ./mvnw spring-boot:run
+
+**To start tunnel to service**
+minikube service weather-service-svc
 

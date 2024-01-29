@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: weather-service-k8s
+      app: weather-service-k8s #match all pod with label app:weather-service-k8s
   replicas: 1 # Number of replicas that will be created for this deployment
   template:
     metadata:

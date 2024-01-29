@@ -27,10 +27,10 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public List<WeatherResponse> getWeatherForCity(WeatherRequest weatherRequest) throws NotFoundException, UnAuthorizedException, InternalServerError {
-        int count = weatherRequest.getDays() * 8;
+
         try {
-            WeatherApiResponse response = weatherApiCall.getWeatherInfo(weatherRequest.getCity(), count);
-            return mapWeatherResponse(response, count);
+            WeatherApiResponse response = weatherApiCall.getWeatherInfo(weatherRequest);
+            return mapWeatherResponse(response);
         }
         catch (HttpClientErrorException.NotFound ex){
             log.error("NotFound HttpClientErrorException Exception Occurred",ex);
@@ -44,11 +44,10 @@ public class WeatherServiceImpl implements WeatherService {
             log.error("Exception Occurred",ex);
             throw new InternalServerError(ex.getMessage());
         }
-
-
     }
 
-    private List<WeatherResponse> mapWeatherResponse(WeatherApiResponse response, int count) {
+    private List<WeatherResponse> mapWeatherResponse(WeatherApiResponse response) {
+        int count = response.getList().size();
         List<WeatherResponse> weatherResponses = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             DailyWeather dailyWeather = createDailyWeather(response, i);
