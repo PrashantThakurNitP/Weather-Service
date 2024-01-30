@@ -13,7 +13,7 @@ pipeline{
          stage('Run JUnit Tests') {
                     steps {
                         echo "Running unit tests"
-                        sh 'mvn install'
+                        sh 'mvn test'
                     }
                 }
         stage("Build Docker Image"){
