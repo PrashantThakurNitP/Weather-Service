@@ -11,4 +11,7 @@ public class Constants {
     public static final String MESSAGE_FOR_SLIGHT_LOW_TEMP="Cold Outside";
     public static final String MESSAGE_FOR_SLIGHT_LOW_VISIBILITY="Low Visibility";
     public static final String MESSAGE_FOR_HUMIDITY="Humid";
+    public static final String QUERY_PARAM_CITY = "q";
+    public static final String QUERY_PARAM_QTY = "cnt";
+    public static final String QUERY_PARAM_APP_ID = "appid";
 }

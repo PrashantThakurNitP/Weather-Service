@@ -30,12 +30,16 @@ class WeatherApiCallTest {
     private String apiUrl;
     @Value("${openweathermap.api.noOfResponseForDay}")
     private int noOfResponseForDay;
+
+    @Value("${openweathermap.api.endpoint}")
+    private String endpoint;
     private AutoCloseable closeable;
     @BeforeEach
     void setUp() {
         closeable = MockitoAnnotations.openMocks(this);
         ReflectionTestUtils.setField(weatherApiCall, "apiKey", "your-api-key");
-        ReflectionTestUtils.setField(weatherApiCall, "apiUrl", "http://example.com/api");
+        ReflectionTestUtils.setField(weatherApiCall, "apiUrl", "http://example.com");
+        ReflectionTestUtils.setField(weatherApiCall, "endpoint", "api");
         ReflectionTestUtils.setField(weatherApiCall, "noOfResponseForDay", 8);
     }
     @After

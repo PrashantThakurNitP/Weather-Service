@@ -56,8 +56,17 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-handler</artifactId>
+			<version>4.1.97.Final</version>
+		</dependency>
 
-        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 <!--		<dependency>-->
 <!--			<groupId>javax.servlet</groupId>-->
