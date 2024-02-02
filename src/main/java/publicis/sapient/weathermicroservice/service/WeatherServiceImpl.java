@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import publicis.sapient.weathermicroservice.domain.response.DailyWeather;
 import publicis.sapient.weathermicroservice.domain.WeatherApiResponse;
 import publicis.sapient.weathermicroservice.domain.WeatherRequest;
 import publicis.sapient.weathermicroservice.domain.response.WeatherResponse;
@@ -48,18 +47,14 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     private List<WeatherResponse> mapWeatherResponse(WeatherApiResponse response) {
-        return response.getList().stream().map(weatherItem->{
-            DailyWeather dailyWeather = createDailyWeather(weatherItem);
-            String message = getSuggestionForWeather(weatherItem);
-            return WeatherResponse.builder()
-                    .dailyWeathers(dailyWeather)
-                    .message(message)
-                    .weatherType(weatherItem.getWeather().get(0).getMain())
-                    .icon(weatherItem.getWeather().get(0).getIcon())
-                    .description(weatherItem.getWeather().get(0).getDescription())
-                    .timezoneOffset(response.getCity().getTimezone())
-                    .build();
-        }).collect(Collectors.toList());
+        return response.getList().stream().map(weatherItem-> WeatherResponse.builder()
+                .dailyWeathers(createDailyWeather(weatherItem))
+                .message(getSuggestionForWeather(weatherItem))
+                .weatherType(weatherItem.getWeather().get(0).getMain())
+                .icon(weatherItem.getWeather().get(0).getIcon())
+                .description(weatherItem.getWeather().get(0).getDescription())
+                .timezoneOffset(response.getCity().getTimezone())
+                .build()).collect(Collectors.toList());
     }
 
 

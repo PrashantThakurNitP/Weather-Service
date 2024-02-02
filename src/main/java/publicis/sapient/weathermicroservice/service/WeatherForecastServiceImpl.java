@@ -52,17 +52,15 @@ public class WeatherForecastServiceImpl implements WeatherForecastService{
 
 
     private Flux<WeatherResponse> mapWeatherResponseNonBlocking(WeatherApiResponse response) {
-        return Flux.fromIterable(response.getList()).map(weatherData -> {
-            DailyWeather dailyWeather = createDailyWeather(weatherData);
-            String message = getSuggestionForWeather(weatherData);
-            return WeatherResponse.builder().dailyWeathers(dailyWeather)
-                    .message(message)
-                    .weatherType(weatherData.getWeather().get(0).getMain())
-                    .icon(weatherData.getWeather().get(0).getIcon())
-                    .description(weatherData.getWeather().get(0).getDescription())
-                    .timezoneOffset(response.getCity().getTimezone())
-                    .build();
-        });
+        return Flux.fromIterable(response.getList()).map(weatherData ->
+                WeatherResponse.builder()
+                .dailyWeathers(createDailyWeather(weatherData))
+                .message(getSuggestionForWeather(weatherData))
+                .weatherType(weatherData.getWeather().get(0).getMain())
+                .icon(weatherData.getWeather().get(0).getIcon())
+                .description(weatherData.getWeather().get(0).getDescription())
+                .timezoneOffset(response.getCity().getTimezone())
+                .build());
     }
 
 }
