@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import publicis.sapient.weathermicroservice.domain.WeatherData;
 import publicis.sapient.weathermicroservice.domain.response.DailyWeather;
 import publicis.sapient.weathermicroservice.domain.WeatherApiResponse;
 import publicis.sapient.weathermicroservice.domain.WeatherRequest;
@@ -17,7 +16,8 @@ import publicis.sapient.weathermicroservice.utils.WeatherApiCall;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static publicis.sapient.weathermicroservice.utils.Constants.*;
+import static publicis.sapient.weathermicroservice.utils.Utility.getSuggestionForWeather;
+import static publicis.sapient.weathermicroservice.utils.Utility.createDailyWeather;
 
 @Service
 @Slf4j
@@ -62,19 +62,5 @@ public class WeatherServiceImpl implements WeatherService {
         }).collect(Collectors.toList());
     }
 
-    private DailyWeather createDailyWeather(WeatherData weatherData) {
-        return DailyWeather.builder()
-                .minTemperature(kelvinToCelsius.apply(weatherData.getMain().getTemp_min()))
-                .maxTemperature(kelvinToCelsius.apply(weatherData.getMain().getTemp_max()))
-                .temperature(kelvinToCelsius.apply(weatherData.getMain().getTemp()))
-                .windSpeed(weatherData.getWind().getSpeed())
-                .date(weatherData.getDt_txt().split(" ").length>1?weatherData.getDt_txt().split(" ")[0]:"")
-                .time(weatherData.getDt_txt().split(" ").length>1?weatherData.getDt_txt().split(" ")[1]:"")
-                .humidity(weatherData.getMain().getHumidity())
-                .pressure(weatherData.getMain().getPressure())
-                .feelsLike(kelvinToCelsius.apply(weatherData.getMain().getFeels_like()))
-                .visibility(weatherData.getVisibility())
-                .build();
-    }
 
 }

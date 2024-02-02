@@ -30,35 +30,7 @@ public class Constants {
     public static Function<Integer, Boolean> isVisibilityLow = visibility -> visibility < 100;
 
     public static Function<Double, Boolean> isHighWind = windSpeed -> windSpeed > 10;
+    public static Function<WeatherData, String> extractDate = weatherData -> weatherData.getDt_txt().split(" ").length>1?weatherData.getDt_txt().split(" ")[0]:"";
+    public static Function<WeatherData, String> extractTime = weatherData -> weatherData.getDt_txt().split(" ").length>1?weatherData.getDt_txt().split(" ")[1]:"";
 
-    public static String getSuggestionForWeather(WeatherData weatherData) {
-        double temperature = weatherData.getMain().getTemp();
-        int weatherId = !weatherData.getWeather().isEmpty() ? weatherData.getWeather().get(0).getId():-1;
-        double windSpeed = weatherData.getWind().getSpeed();
-        int humidity = weatherData.getMain().getHumidity();
-        int visibility = weatherData.getVisibility();
-
-        if (isSuperHot.apply(temperature)) {
-            return MESSAGE_FOR_HIGH_TEMP;
-        } else if (isRainy.apply(weatherId)) {
-            return MESSAGE_FOR_RAIN;
-        } else if (isHighWind.apply(windSpeed)) {
-            return MESSAGE_FOR_HIGH_WINDS;
-        } else if (isThunderstorm.apply(weatherId)) {
-            return MESSAGE_FOR_THUNDERSTORM;
-        } else if (isChilling.apply(temperature)) {
-            return MESSAGE_FOR_LOW_TEMP;
-        }
-        else if (isSlightlyCold.apply(temperature)) {
-            return MESSAGE_FOR_SLIGHT_LOW_TEMP;
-        }
-        else if (isVisibilityLow.apply(visibility)) {
-            return MESSAGE_FOR_SLIGHT_LOW_VISIBILITY;
-        }
-        else if (isHumid.apply(humidity)) {
-            return MESSAGE_FOR_HUMIDITY;
-        }else {
-            return MESSAGE_FOR_NICE_WEATHER;
-        }
-    }
 }

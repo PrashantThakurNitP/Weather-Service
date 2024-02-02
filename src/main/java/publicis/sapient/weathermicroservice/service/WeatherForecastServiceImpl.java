@@ -16,8 +16,8 @@ import publicis.sapient.weathermicroservice.utils.WebClientWeatherApi;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
-
-import static publicis.sapient.weathermicroservice.utils.Constants.*;
+import static publicis.sapient.weathermicroservice.utils.Utility.getSuggestionForWeather;
+import static publicis.sapient.weathermicroservice.utils.Utility.createDailyWeather;
 
 @Service
 @Slf4j
@@ -63,10 +63,6 @@ public class WeatherForecastServiceImpl implements WeatherForecastService{
                     .timezoneOffset(response.getCity().getTimezone())
                     .build();
         });
-    }
-
-    private DailyWeather createDailyWeather(WeatherData weatherData) {
-        return DailyWeather.builder().minTemperature(kelvinToCelsius.apply(weatherData.getMain().getTemp_min())).maxTemperature(kelvinToCelsius.apply(weatherData.getMain().getTemp_max())).temperature(kelvinToCelsius.apply(weatherData.getMain().getTemp())).windSpeed(weatherData.getWind().getSpeed()).date(weatherData.getDt_txt().split(" ").length > 1 ? weatherData.getDt_txt().split(" ")[0] : "").time(weatherData.getDt_txt().split(" ").length > 1 ? weatherData.getDt_txt().split(" ")[1] : "").humidity(weatherData.getMain().getHumidity()).pressure(weatherData.getMain().getPressure()).feelsLike(kelvinToCelsius.apply(weatherData.getMain().getFeels_like())).visibility(weatherData.getVisibility()).build();
     }
 
 }
