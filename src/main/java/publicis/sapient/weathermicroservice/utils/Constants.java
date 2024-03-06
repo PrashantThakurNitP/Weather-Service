@@ -32,5 +32,6 @@ public class Constants {
     public static Function<Double, Boolean> isHighWind = windSpeed -> windSpeed > 10;
     public static Function<WeatherData, String> extractDate = weatherData -> weatherData.getDt_txt().split(" ").length>1?weatherData.getDt_txt().split(" ")[0]:"";
     public static Function<WeatherData, String> extractTime = weatherData -> weatherData.getDt_txt().split(" ").length>1?weatherData.getDt_txt().split(" ")[1]:"";
+    public static final String CIRCUIT_BREAKER_NAME = "weatherApiCircuitBreaker";
 
 }

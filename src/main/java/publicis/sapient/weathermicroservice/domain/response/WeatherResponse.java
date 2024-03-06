@@ -1,30 +1,30 @@
 package publicis.sapient.weathermicroservice.domain.response;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+//import io.swagger.annotations.ApiModel;
+//import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 @Data
-@ApiModel
+//@ApiModel
 @SuperBuilder
 public class WeatherResponse {
 
-    @ApiModelProperty
+   // @ApiModelProperty
     private String message;
 
-    @ApiModelProperty
+   // @ApiModelProperty
     private String icon;
 
-    @ApiModelProperty
+   // @ApiModelProperty
     private String description;
 
-    @ApiModelProperty
+   // @ApiModelProperty
     private DailyWeather dailyWeathers;
 
-    @ApiModelProperty
+    //@ApiModelProperty
     private String  weatherType;
-    @ApiModelProperty
+    //@ApiModelProperty
     private int timezoneOffset;
 
 }
