@@ -91,6 +91,15 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-test -->
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<version>3.6.4</version>
+			<scope>test</scope>
+		</dependency>
+
+
 
 		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
